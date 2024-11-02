@@ -1,6 +1,6 @@
 set -o errexit
 
-bin/rails bundle exec rails
+bundle exec rails
 bundle install
 bundle exec rake assets:precompile
 bundle exec rake assets:clean
