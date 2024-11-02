@@ -1,4 +1,8 @@
+イベント作成ページ
+<br>
 <%= form_with model: @ivent do |form| %>
   <%= form.text_field :name %>
   <%= form.submit %>
 <% end %>
+
+<%= link_to "イベント一覧に戻る", ivents_path %>

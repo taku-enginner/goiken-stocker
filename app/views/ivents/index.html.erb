@@ -1,2 +1,22 @@
-<h1>Ivents#Index</h1>
-<p>Find me in app/views/ivents/home.html.erb</p>
+<% if user_signed_in? %>
+  <h1>ユーザーID：<%= @user.id %></h1>
+  <br>
+  <%= link_to '新規イベント登録', new_ivent_path %>
+  <br>
+  <%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete } %>
+<% else %>
+  <br>
+  【イベントを登録するにはログインしてください。】
+  <br>
+  <%= link_to 'サインアップ', new_user_registration_path %>
+  <br>
+  <%= link_to 'ログイン', new_user_session_path %>
+<% end %>
+<br>
+<br>
+<h1>イベント一覧の表示</h1>
+<% @ivents.each do |ivent| %>
+  <div>
+   <h2>イベント名: <%= ivent.name %>  //  作成ユーザー：<%= ivent.user_id %></h2>
+  </div>
+<% end %>
