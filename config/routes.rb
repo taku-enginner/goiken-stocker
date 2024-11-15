@@ -12,5 +12,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   resources :ivents
-  root "ivents#index"
+  root "top#top"
 end
