@@ -21,6 +21,10 @@ class IventsController < ApplicationController
     end
   end
 
+  def edit
+    
+  end
+
   def destroy
     sign_out(current_user)
     redirect_to root_path
