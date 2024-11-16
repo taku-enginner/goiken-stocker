@@ -4,9 +4,9 @@
 <p class="text-center text-2xl py-5">このアプリはユーザーのイベントに対する意見を集めるアプリです</p>
 
 <div class="flex space-x-4 m-4 justify-center">
-  <%= link_to t('top.sign_up'), '#', class:"bg-blue-500 text-white px-4 py-2 rounded text-3xl" %>
+  <%= link_to t('top.sign_up'), new_user_registration_path, class:"bg-blue-500 text-white px-4 py-2 rounded text-3xl" %>
   <br>
-  <%= link_to t('top.log_in'), '#', class:"bg-blue-500 text-white px-4 py-2 rounded text-3xl"  %>
+  <%= link_to t('top.log_in'), new_user_session_path, class:"bg-blue-500 text-white px-4 py-2 rounded text-3xl"  %>
   <br>
-  <%= link_to t('top.guest_log_in'), '#', class:"bg-blue-500 text-white px-4 py-2 rounded text-3xl"  %>
+  <%= link_to t('top.guest_log_in'), ivents_path, class:"bg-blue-500 text-white px-4 py-2 rounded text-3xl"  %>
 </div>
