@@ -1,4 +1,4 @@
 class Ivent < ApplicationRecord
   belongs_to :user
-  validates :name, presence: true
+  validates :name, presence: true, length: { minimum: 2}
 end
