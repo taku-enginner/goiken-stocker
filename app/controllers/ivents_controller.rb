@@ -25,10 +25,10 @@ class IventsController < ApplicationController
     
   end
 
-  def destroy
-    sign_out(current_user)
-    redirect_to root_path
+  def update
+    
   end
+  
 
   private
   def ivent_params
