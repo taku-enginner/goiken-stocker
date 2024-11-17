@@ -68,4 +68,6 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem "simplecov", require: false
+  # requireを指定することで、Gemが自動的に読み込まれなくなる。必要なファイルでrequireをすることが必要になる。
 end
