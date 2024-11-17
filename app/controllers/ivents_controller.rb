@@ -1,6 +1,8 @@
 class IventsController < ApplicationController
+  before_action :set_ivent, only: [:edit, :update, :destroy]
+
   def index
-    @ivents = Ivent.all
+    @ivents = Ivent.all.order(:id)
     @user = current_user
   end
 
@@ -26,11 +28,27 @@ class IventsController < ApplicationController
   end
 
   def update
-    
+    if @ivent.update(ivent_params)
+      redirect_to @ivent, notice: "イベントが更新されました"
+    else
+      render :edit, notice: "イベントを更新できませんでした"
+    end
   end
   
+  def destroy
+    @ivent.destroy
+    respond_to do |format|
+      format.html {redirect_to ivents_path, notice: "イベントが削除されました。"}
+      format.json {head :no_content}
+    end
+  end
 
   private
+
+  def set_ivent
+    @ivent = Ivent.find(params[:id])
+  end
+
   def ivent_params
     params.require(:ivent).permit(:name)
   end
