@@ -1,6 +1,6 @@
 
 services:
-  db:
+  postgres:
     image: postgres
     restart: always
     environment:
@@ -32,7 +32,7 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      db:
+      postgres:
         condition: service_healthy
 volumes:
   bundle_data:
