@@ -83,7 +83,7 @@ jobs:
         run: cp config/database.yml.example config/database.yml
 
       - name: Create and migrate database
-        run: bin/rails db:create bin/rails db:migrate
+        run: export PATH=$PATH:./bin bin/rails db:create bin/rails db:migrate
         
       - name: Run tests
         env:
