@@ -1,15 +1,25 @@
 require "simplecov"
+require "database_cleaner/active_record"
 SimpleCov.start
 
-# テストごとにデータベースをリセットすることで、データベース内の重複したデータが原因となる問題を回避できる
-DatabaseCleaner.strategy = :truncation
 
 RSpec.configure do |config|
 
-  # Fakerのユニークキャッシュをクリアする
-  config.before(:each) do
-     Faker::UniqueGenerator.clear
-  end
+# テストごとにデータベースをリセット
+config.before(:suite) do
+   DatabaseCleaner.clean_with(:truncation)
+end
+ 
+config.before(:each) do
+  # テストごとにデータベースをリセットすることで、データベース内の重複したデータが原因となる問題を回避できる
+   DatabaseCleaner.strategy = :transaction
+   DatabaseCleaner.start
+end
+ 
+config.after(:each) do 
+   DatabaseCleaner.clean
+   Faker::UniqueGenerator.clear
+end
 
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest

@@ -56,6 +56,7 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "faker"
   gem "pry"
+  gem "database_cleaner-active_record" # テスト時にデータベースをリセットするためのgem
 end
 
 group :development do
