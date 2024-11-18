@@ -16,6 +16,7 @@ class IventsController < ApplicationController
 
   def create
     @ivent = current_user.ivents.build(ivent_params)
+    binding.pry
     if @ivent.save
       redirect_to ivents_path, notice: "イベントが作成されました。"
     else
