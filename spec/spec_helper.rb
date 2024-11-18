@@ -1,6 +1,8 @@
 require "simplecov"
 SimpleCov.start
 
+# テストごとにデータベースをリセットすることで、データベース内の重複したデータが原因となる問題を回避できる
+DatabaseCleaner.strategy = :truncation
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
