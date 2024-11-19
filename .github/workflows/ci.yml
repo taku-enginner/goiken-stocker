@@ -92,7 +92,12 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
-          DATABASE_URL: postgres://postgres:password@localhost:5432/myapp_test
+          DATABASE_URL: postgres://postgres:password@postgres:5432/myapp_test
+          # postgres: データベースユーザー名
+          # password: データベースパスワード
+          # @postgres: ホスト名
+          # 5432: ポート番号
+          # myapp_test: データベース名
           # REDIS_URL: redis://localhost:6379/0
         run: bundle exec rspec
 
