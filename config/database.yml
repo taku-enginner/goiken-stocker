@@ -1,22 +1,42 @@
 default: &default
+  # YAMLのアンカー機能を使って＆defaultとして定義。この設置を他の環境設定で再利用できる。
+
   adapter: postgresql
+  # データベースの種類を指定。
+
   encoding: unicode
+  # データベースのエンコーディングを指定
+
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  # コネクションプールのサイズを指定。RAISL_MAX_THEADSが設定されていればその値を、なければデフォルトで５を使用
+
   host: postgres
+  # データベースサーバーのホスト名を指定
+
   username: postgres
+  # データベースに接続するためのユーザー名
+
   password: password
+  # データベースに接続するためのパスワード
 
 development:
   <<: *default
+  # 先ほど定義したdefaultの設定を継承
   database: myapp_development
+  # 使用するデータベース名を指定
 
 test:
   <<: *default
+  # defaultの設定を継承
   database: myapp_test
+  # 使用するデータベース名を指定
 
 production:
   <<: *default
+  # defaultの設定を継承
+
   # database: myapp_production
   # username: myapp
   # password: <%= ENV["MYAPP_DATABASE_PASSWORD"] %>
   url: <%= ENV['DATABASE_URL'] %>
+  # 環境変数からデータベース接続のURLを取得

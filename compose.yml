@@ -1,48 +1,103 @@
 networks: 
   my_network:
    driver: bridge
+# my_network：カスタムネットワークの名前
+# driver: bridge　：　ブリッジネットワークドライバーを使用する指定
 
 services:
   postgres:
+  # サービス名
     image: postgres
+    # PostgreSQLイメージを使用
+
     restart: always
+    # サービスが失敗したとき常に再起動する設定
+
     environment:
+    # 環境変数を定義
       TZ: Asia/Tokyo
+      # タイムゾーン設定
+
       POSTGRES_PASSWORD: password
+      # PostgreSQLのパスワードを設定
+
     volumes:
+    # データ永続化のためのボリュームをマウント
       - postgresql_data:/var/lib/postgresql
+      # ボリュームをマウントするパス
+
     networks:
+    # サービスが接続するネットワークを指定
       - my_network
+      # カスタムネットワークに接続
+
     ports:
+    # ホストとコンテナ間で公開するポートを指定
       - 5432:5432
+      # PostgreSQLのデフォルトポート
 
     healthcheck:
+    # サービスの健康状態をチェックする指定
       test: ["CMD-SHELL", "pg_isready -d myapp_development -U postgres"]
+      # 実行するコマンド
       interval: 10s
+      # チェックの間隔
       timeout: 5s
+      # タイムアウト
       retries: 5
+      # リトライ回数
+
   web:
     build:
+    # イメージをビルドするための設置絵
       context: .
+      # ビルドコンテキストのディレクトリ
       dockerfile: Dockerfile.dev
+      # 使用するDockerfile
     command: bash -c "bundle install && bundle exec rails db:prepare && rm -f tmp/pids/server.pid && ./bin/dev"
+    # コンテナが起動時に実行するコマンド
+
     tty: true
+    # TTYモードを有効にする設定
+
     stdin_open: true
+    # 標準入力を開く設定
+
     volumes:
+    # ホストとコンテナ間でマウントするボリュームを指定
       - .:/myapp
+      # ソースコードをマウント
       - bundle_data:/usr/local/bundle:cached
+      # バンドルデータをマウント
       - node_modules:/myapp/node_modules
+      # ノードモジュールをマウント
+
     environment:
+    # 環境変数を定義
       TZ: Asia/Tokyo
+      # タイムゾーンを設定
+
     ports:
+    # ホストとコンテナ間で公開するポートを指定
       - "3000:3000"
+      # Webアプリケーションのデフォルトポート
+
     depends_on:
+    # 依存関係を持つサービスを指定
+
       postgres:
         condition: service_healthy
+        # PostgreSQLサービスがヘルシー状態である伊ことを確認
     networks: 
-    - my_network
+    # サービスが接続するネットワークを指定
+      - my_network
+      # カスタムネットワークに接続
+    
 
 volumes:
   bundle_data:
+  # バンドルデータ用のボリューム
   postgresql_data:
+  # PostgreSQLデータ用のボリューム
   node_modules:
+  # ノードモジュール用のボリューム

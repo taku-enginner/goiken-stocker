@@ -48,11 +48,22 @@ jobs:
 
     services:
       postgres:
+      # postgresサービス
+
         image: postgres
+        # 使用するイメージの指定
+
         env:
+        # 環境変数の指定
+
           POSTGRES_USER: postgres
+          # PostgreSQLのユーザー名を指定
+
           POSTGRES_PASSWORD: password
+          # PostgreSQLのパスワードを指定
+          
           POSTGRES_DB: myapp_test
+          # 作成するデータベース名を指定
         ports:
           - 5432:5432
         options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -92,10 +103,10 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
-          DATABASE_URL: postgres://postgres:password@postgres:5432/myapp_test
+          DATABASE_URL: postgres://postgres:password@localhost:5432/myapp_test
           # postgres: データベースユーザー名
           # password: データベースパスワード
-          # @postgres: ホスト名
+          # @localhost: ホスト名
           # 5432: ポート番号
           # myapp_test: データベース名
           # REDIS_URL: redis://localhost:6379/0
