@@ -90,8 +90,12 @@ jobs:
       - name: Install dependencies
         run: bundle install
       
+      # アセットプリコンパイルを実施
+      # manifest.jsにも下記を追記する
+      # //= link application.tailwind.css
       - name: Precompile assets
         run: RAILS_ENV=test bundle exec rake assets:precompile
+
         
       - name: Set up database.yml
         run: cp config/database.yml.example config/database.yml
