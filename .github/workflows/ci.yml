@@ -89,6 +89,9 @@ jobs:
 
       - name: Install dependencies
         run: bundle install
+      
+      - name: Precompile assets
+        run: RAILS_ENV=test bundle exec rake assets:precompile
         
       - name: Set up database.yml
         run: cp config/database.yml.example config/database.yml
