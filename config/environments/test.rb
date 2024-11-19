@@ -7,6 +7,7 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   # アセットコンパイルを有効にすることで、application.cssを見つけられるようにする
+  # アセットコンパイルはWebアプリケーションにおいてJS,CSS,フロントのアセットを効率的に管理するためのプロセス
   config.assets.compile = true
 
   # Settings specified here will take precedence over those in config/application.rb.

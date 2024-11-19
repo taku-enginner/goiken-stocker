@@ -58,6 +58,10 @@ RUN bundle exec bootsnap precompile app/ lib/
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
+# アプリケーションコードコピー後に配置して、すべてのコードと依存関係が利用可能な状態でアセットをプリコンパイルする
+# ビルド時にアセットをプリコンパイルすることで、最終的なイメージにアセットを含めることができる
+RUN RAILS_ENV=test bundle exec rake assets:precompile
+
 
 RUN rm -rf node_modules
 
