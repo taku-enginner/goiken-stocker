@@ -1,3 +1,6 @@
+networks: 
+  my_network:
+   driver: bridge
 
 services:
   postgres:
@@ -8,6 +11,8 @@ services:
       POSTGRES_PASSWORD: password
     volumes:
       - postgresql_data:/var/lib/postgresql
+    networks:
+      - my_network
     ports:
       - 5432:5432
 
@@ -34,6 +39,9 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    networks: 
+    - my_network
+
 volumes:
   bundle_data:
   postgresql_data:
