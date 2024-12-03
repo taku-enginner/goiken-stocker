@@ -16,9 +16,11 @@ class IventsController < ApplicationController
 
   def create
     @ivent = current_user.ivents.build(ivent_params)
-    binding.pry
     if @ivent.save
       redirect_to ivents_path, notice: "イベントが作成されました。"
+      UserMailer.welcome_email.deliver_now
+      # format.html { redirect_to user_url(current_user), notice: "イベントが正常に作成されました" }
+      # format.json { render :show, status: :created, location: current_user }
     else
       render new_ivent_path
     end
